@@ -1,133 +1,81 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8V4XWX4J1Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8V4XWX4J1Q');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>第一卷 · 曲折跌宕的命运</title>
     <style>
-        /* ===== 全局样式 & 原有阅读风格 ===== */
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            margin: 0;
-            padding: 0;
             font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
             background: #fefefe;
             color: #111;
-        }
-
-        .reader-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            line-height: 1.6;
+            padding: 0 1em;
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 1em;
         }
-
         .reader-header {
-            padding: 1.2em 0 0.5em 0;
+            padding: 1.5em 0 0.5em;
             border-bottom: 1px solid #e0d6cc;
-            margin-bottom: 0.8em;
+            margin-bottom: 1em;
         }
-        .reader-header h2 {
-            margin: 0;
-            font-weight: 400;
-            font-size: 1.6em;
-            letter-spacing: 2px;
-            color: #4a3729;
-        }
-        .reader-header .sub {
-            font-size: 0.9em;
-            color: #7a6a5c;
-            margin-top: 4px;
-        }
-
+        .reader-header h2 { font-weight: 400; font-size: 1.8em; color: #4a3729; }
         .progress-bar-container {
             width: 100%;
-            height: 3px;
+            height: 4px;
             background: #e9e0d8;
-            margin: 10px 0 5px;
-            border-radius: 3px;
+            margin: 10px 0 15px;
+            border-radius: 4px;
         }
         .progress-bar-fill {
             height: 100%;
             width: 0%;
             background: #b76e2e;
-            border-radius: 3px;
-            transition: width 0.15s;
+            border-radius: 4px;
+            transition: width 0.2s;
         }
-
+        /* 核心：阅读容器，固定高度并可滚动 */
         .reader-content {
-            flex: 1;
             background: #fefefe;
-            border-radius: 6px;
-            margin: 0.5em 0 1.2em;
-            height: calc(100vh - 240px);
+            height: calc(100vh - 260px);
             min-height: 400px;
             overflow-y: auto;
-            padding: 0.2em 0.2em 1em 0.2em;
-            scroll-behavior: smooth;
+            padding: 0.2em 0.2em 1em;
+            border-radius: 6px;
+            /* 注意：这里不设置 scroll-behavior，避免干扰强制滚动 */
         }
-
         .page-content {
             white-space: pre-wrap;
             font-size: 1.1em;
-            line-height: 1.6;
             word-break: break-word;
         }
-        .page-content p {
-            margin: 0 0 1.2em 0;
-        }
-
+        .page-content p { margin-bottom: 1.2em; }
         .reader-nav {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 12px 0 20px;
+            gap: 15px;
+            padding: 20px 0 30px;
             border-top: 1px solid #e0d6cc;
-            background: #fefefe;
+            margin-top: 15px;
         }
         .nav-btn {
             background: #f2ebe4;
-            border: none;
+            border: 1px solid #d6c9be;
             border-radius: 30px;
             padding: 8px 20px;
             font-size: 1rem;
-            font-weight: 500;
-            color: #3e2e23;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            transition: all 0.15s;
-            border: 1px solid #d6c9be;
-            min-width: 80px;
+            transition: 0.2s;
+            color: #3e2e23;
         }
-        .nav-btn:hover {
-            background: #e3d5c8;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-            border-color: #b7a392;
-        }
-        .nav-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            box-shadow: none;
-            background: #f2ebe4;
-        }
+        .nav-btn:hover { background: #e3d5c8; }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .page-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 1rem;
         }
         .page-input {
             width: 70px;
@@ -136,12 +84,6 @@
             border-radius: 24px;
             text-align: center;
             font-size: 1rem;
-            background: white;
-            font-family: inherit;
-        }
-        .page-total {
-            color: #5f4e40;
-            font-weight: 500;
         }
         .go-btn {
             background: #b76e2e;
@@ -149,64 +91,67 @@
             border: none;
             border-radius: 24px;
             padding: 6px 16px;
-            font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.15s;
+        }
+        /* 固定返回顶部按钮 */
+        #fixed-scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #b76e2e;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            z-index: 99;
+            transition: 0.2s;
             border: 1px solid #9c5a26;
         }
-        .go-btn:hover {
-            background: #9c5a26;
-        }
-
+        #fixed-scroll-top:hover { background: #9c5a26; transform: scale(1.05); }
+        #raw-text-container { display: none; }
         @media (max-width: 600px) {
-            .reader-content {
-                height: calc(100vh - 220px);
-            }
-            .nav-btn {
-                padding: 6px 14px;
-                font-size: 0.9rem;
-                min-width: 70px;
-            }
-            .page-input {
-                width: 60px;
-            }
-        }
-
-        #raw-text-container {
-            display: none;
+            .reader-content { height: calc(100vh - 240px); }
+            .nav-btn { padding: 6px 14px; }
+            #fixed-scroll-top { padding: 10px 16px; font-size: 1rem; bottom: 20px; right: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="reader-container">
-    <div class="reader-header">
-        <h2>第一卷：曲折跌宕的命运啊，通往何处</h2>
-        <div class="sub">· 自动分页 · 页码跳转 ·</div>
-    </div>
-
-    <div class="progress-bar-container">
-        <div class="progress-bar-fill" id="progressFill"></div>
-    </div>
-
-    <div class="reader-content" id="readerContent">
-        <div class="page-content" id="pageContent"></div>
-    </div>
-
-    <div class="reader-nav">
-        <button class="nav-btn" id="prevPageBtn" title="上一页">◀ 上一页</button>
-        <div class="page-indicator">
-            <span>第</span>
-            <input type="number" id="pageInput" class="page-input" min="1" value="1">
-            <span>/</span>
-            <span id="totalPagesSpan" class="page-total">1</span>
-            <span>页</span>
-            <button class="go-btn" id="goPageBtn">跳转</button>
-        </div>
-        <button class="nav-btn" id="nextPageBtn" title="下一页">下一页 ▶</button>
-    </div>
+<div class="reader-header">
+    <h2>第一卷：曲折跌宕的命运啊，通往何处</h2>
+    <div class="sub" style="color:#7a6a5c; margin-top:5px;">· 自动分页 · 稳定回到顶部 ·</div>
 </div>
 
+<div class="progress-bar-container">
+    <div class="progress-bar-fill" id="progressFill"></div>
+</div>
+
+<!-- 阅读容器 -->
+<div class="reader-content" id="readerContent">
+    <div class="page-content" id="pageContent"></div>
+</div>
+
+<div class="reader-nav">
+    <button class="nav-btn" id="prevPageBtn">◀ 上一页</button>
+    <div class="page-indicator">
+        <span>第</span>
+        <input type="number" id="pageInput" class="page-input" min="1" value="1">
+        <span>/</span>
+        <span id="totalPagesSpan">1</span>
+        <span>页</span>
+        <button class="go-btn" id="goPageBtn">跳转</button>
+    </div>
+    <button class="nav-btn" id="nextPageBtn">下一页 ▶</button>
+</div>
+
+<!-- 固定返回顶部按钮（备用） -->
+<button id="fixed-scroll-top" title="回到顶部">⬆️ 顶部</button>
+
+<!-- 小说原文容器（隐藏） -->
 <div id="raw-text-container">
 
 第一卷：曲折跌宕的命运啊，通往何处
@@ -1325,118 +1270,123 @@
 </div>
 
 <script>
-(function() {
-    "use strict";
+    (function() {
+        "use strict";
+        
+        // ----- 获取元素 -----
+        const rawContainer = document.getElementById('raw-text-container');
+        const pageContent = document.getElementById('pageContent');
+        const prevBtn = document.getElementById('prevPageBtn');
+        const nextBtn = document.getElementById('nextPageBtn');
+        const pageInput = document.getElementById('pageInput');
+        const totalSpan = document.getElementById('totalPagesSpan');
+        const goBtn = document.getElementById('goPageBtn');
+        const progressFill = document.getElementById('progressFill');
+        const readerContent = document.getElementById('readerContent');
+        const fixedTopBtn = document.getElementById('fixed-scroll-top');
 
-    // ----- 获取元素 -----
-    const rawContainer = document.getElementById('raw-text-container');
-    const pageContent = document.getElementById('pageContent');
-    const prevBtn = document.getElementById('prevPageBtn');
-    const nextBtn = document.getElementById('nextPageBtn');
-    const pageInput = document.getElementById('pageInput');
-    const totalSpan = document.getElementById('totalPagesSpan');
-    const goBtn = document.getElementById('goPageBtn');
-    const progressFill = document.getElementById('progressFill');
-    const readerContent = document.getElementById('readerContent');
-
-    // ----- ★ 每页目标字符数（可自行调整，建议 4000~8000）-----
-    const CHARS_PER_PAGE = 5500;   // 5500 字符/页，页面长度适中
-
-    // ----- 解析原文，分割段落 -----
-    let fullText = rawContainer.innerText || rawContainer.textContent;
-    const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
-
-    // ----- 按字符数分页（保持段落完整）-----
-    function paginateByChars(paragraphs, charsPerPage) {
-        const pages = [];
-        let currentPageParas = [];
-        let currentCharCount = 0;
-
-        for (let para of paragraphs) {
-            const paraLength = para.length;
-            if (currentCharCount + paraLength > charsPerPage && currentPageParas.length > 0) {
-                pages.push(currentPageParas);
-                currentPageParas = [];
-                currentCharCount = 0;
+        // ----- 配置参数 -----
+        const CHARS_PER_PAGE = 4000;   // 每页字符数，可自行调整
+        
+        // ----- 解析文本并分页 -----
+        let fullText = rawContainer.innerText || rawContainer.textContent;
+        const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
+        
+        function paginate(paras, charsPerPage) {
+            const pages = [];
+            let currentPageParas = [];
+            let currentCharCount = 0;
+            for (let para of paras) {
+                const paraLen = para.length;
+                if (currentCharCount + paraLen > charsPerPage && currentPageParas.length > 0) {
+                    pages.push(currentPageParas);
+                    currentPageParas = [];
+                    currentCharCount = 0;
+                }
+                currentPageParas.push(para);
+                currentCharCount += paraLen;
             }
-            currentPageParas.push(para);
-            currentCharCount += paraLength;
+            if (currentPageParas.length > 0) pages.push(currentPageParas);
+            return pages;
         }
-        if (currentPageParas.length > 0) {
-            pages.push(currentPageParas);
-        }
-        return pages;
-    }
+        
+        const pages = paginate(paragraphs, CHARS_PER_PAGE);
+        const totalPages = pages.length;
+        let currentPage = 1;
 
-    const pages = paginateByChars(paragraphs, CHARS_PER_PAGE);
-    const totalPages = pages.length;
-    let currentPage = 1;
-
-    // ----- 渲染指定页，并强制滚动到阅读区顶部 -----
-    function renderPage(page) {
-        if (page < 1) page = 1;
-        if (page > totalPages) page = totalPages;
-        currentPage = page;
-
-        const pageParagraphs = pages[page - 1] || [];
-
-        let html = '';
-        pageParagraphs.forEach(para => {
-            const formatted = para.replace(/\n/g, '<br>');
-            html += `<p>${formatted}</p>`;
-        });
-        pageContent.innerHTML = html;
-
-        // 更新页码与按钮
-        pageInput.value = currentPage;
-        totalSpan.textContent = totalPages;
-        prevBtn.disabled = (currentPage === 1);
-        nextBtn.disabled = (currentPage === totalPages);
-        progressFill.style.width = (currentPage / totalPages) * 100 + '%';
-
-        // ★ 确保滚动到顶部（多重保障）
-        // 1. 立即尝试滚动
-        readerContent.scrollTop = 0;
-        // 2. 使用 requestAnimationFrame 在下一帧滚动
-        requestAnimationFrame(() => {
+        // ----- 核心：渲染并强制回到顶部 -----
+        function renderPage(page) {
+            // 边界处理
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+            currentPage = page;
+            
+            // 渲染内容
+            const pageParas = pages[page - 1] || [];
+            let html = '';
+            pageParas.forEach(para => {
+                html += `<p>${para.replace(/\n/g, '<br>')}</p>`;
+            });
+            pageContent.innerHTML = html;
+            
+            // 更新UI
+            pageInput.value = currentPage;
+            totalSpan.textContent = totalPages;
+            prevBtn.disabled = (currentPage === 1);
+            nextBtn.disabled = (currentPage === totalPages);
+            progressFill.style.width = (currentPage / totalPages) * 100 + '%';
+            
+            // ========== 强制滚动到顶部（多重保障） ==========
+            // 1. 立即执行
             readerContent.scrollTop = 0;
-            // 3. 再次用 setTimeout 确保 DOM 渲染完毕
-            setTimeout(() => {
+            // 2. 下一帧渲染时执行
+            requestAnimationFrame(() => {
                 readerContent.scrollTop = 0;
-            }, 5);
+                // 3. 稍作延迟后再次执行，应对某些浏览器的渲染延迟
+                setTimeout(() => {
+                    readerContent.scrollTop = 0;
+                    // 如果上述都失败，尝试操作根元素（极少情况）
+                    if (readerContent.scrollTop !== 0) {
+                        document.documentElement.scrollTop = 0;
+                        document.body.scrollTop = 0;
+                    }
+                }, 20);
+            });
+        }
+
+        // ----- 事件绑定 -----
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) renderPage(currentPage - 1);
         });
-    }
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) renderPage(currentPage + 1);
+        });
+        function jumpToPage() {
+            let target = parseInt(pageInput.value, 10);
+            if (isNaN(target) || target < 1) target = 1;
+            if (target > totalPages) target = totalPages;
+            renderPage(target);
+        }
+        goBtn.addEventListener('click', jumpToPage);
+        pageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') jumpToPage();
+        });
+        
+        // 固定按钮：滚动到阅读容器顶部
+        fixedTopBtn.addEventListener('click', () => {
+            readerContent.scrollTop = 0;
+        });
 
-    // ----- 事件绑定 -----
-    prevBtn.addEventListener('click', () => {
-        if (currentPage > 1) renderPage(currentPage - 1);
-    });
-    nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages) renderPage(currentPage + 1);
-    });
-
-    function jumpToPage() {
-        let target = parseInt(pageInput.value, 10);
-        if (isNaN(target) || target < 1) target = 1;
-        if (target > totalPages) target = totalPages;
-        renderPage(target);
-    }
-    goBtn.addEventListener('click', jumpToPage);
-    pageInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') jumpToPage();
-    });
-
-    // ----- 初始化 -----
-    if (paragraphs.length === 0) {
-        pageContent.innerHTML = '<p style="color:#888; text-align:center; padding:2em;">请将小说原文粘贴到隐藏区域。</p>';
-        totalSpan.textContent = '0';
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
-    } else {
-        renderPage(1);
-    }
-})();
+        // ----- 初始化 -----
+        if (paragraphs.length === 0) {
+            pageContent.innerHTML = '<p style="color:#888; text-align:center; padding:2em;">请将小说原文粘贴到隐藏区域</p>';
+            totalSpan.textContent = '0';
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+        } else {
+            renderPage(1);
+        }
+    })();
 </script>
-
 </body>
 </html>
