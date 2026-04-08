@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>第一卷 · 曲折跌宕的命运</title>
     <style>
-        /* ===== 全局样式 & 原有阅读风格（完全保留） ===== */
+        /* ===== 全局样式 & 原有阅读风格 ===== */
         * {
             box-sizing: border-box;
         }
@@ -1339,12 +1339,11 @@
     const progressFill = document.getElementById('progressFill');
     const readerContent = document.getElementById('readerContent');
 
-    // ----- 配置参数：每页目标字符数（可自行调整）-----
-    const CHARS_PER_PAGE = 1800;   // 大约相当于 300~400 个中文字符，可根据需要修改
+    // ----- ★ 每页目标字符数（可自行调整，建议 4000~8000）-----
+    const CHARS_PER_PAGE = 5500;   // 5500 字符/页，页面长度适中
 
     // ----- 解析原文，分割段落 -----
     let fullText = rawContainer.innerText || rawContainer.textContent;
-    // 按空行分割段落（保留段落内换行）
     const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
 
     // ----- 按字符数分页（保持段落完整）-----
@@ -1355,7 +1354,6 @@
 
         for (let para of paragraphs) {
             const paraLength = para.length;
-            // 如果当前页加上这个段落后会超过阈值，且当前页非空，则另起一页
             if (currentCharCount + paraLength > charsPerPage && currentPageParas.length > 0) {
                 pages.push(currentPageParas);
                 currentPageParas = [];
@@ -1364,7 +1362,6 @@
             currentPageParas.push(para);
             currentCharCount += paraLength;
         }
-        // 最后一页
         if (currentPageParas.length > 0) {
             pages.push(currentPageParas);
         }
@@ -1377,36 +1374,37 @@
 
     // ----- 渲染指定页，并强制滚动到阅读区顶部 -----
     function renderPage(page) {
-        // 边界处理
         if (page < 1) page = 1;
         if (page > totalPages) page = totalPages;
         currentPage = page;
 
         const pageParagraphs = pages[page - 1] || [];
 
-        // 构建 HTML：每个段落用 <p> 包裹，保留段落内换行
         let html = '';
         pageParagraphs.forEach(para => {
-            // 将段落内的单个换行转为 <br>，以保证显示效果
             const formatted = para.replace(/\n/g, '<br>');
             html += `<p>${formatted}</p>`;
         });
         pageContent.innerHTML = html;
 
-        // 更新页码显示与按钮状态
+        // 更新页码与按钮
         pageInput.value = currentPage;
         totalSpan.textContent = totalPages;
         prevBtn.disabled = (currentPage === 1);
         nextBtn.disabled = (currentPage === totalPages);
         progressFill.style.width = (currentPage / totalPages) * 100 + '%';
 
-        // 强制滚动到阅读区顶部
-        setTimeout(() => {
-            readerContent.scrollTo({
-                top: 0,
-                behavior: 'auto'
-            });
-        }, 0);
+        // ★ 确保滚动到顶部（多重保障）
+        // 1. 立即尝试滚动
+        readerContent.scrollTop = 0;
+        // 2. 使用 requestAnimationFrame 在下一帧滚动
+        requestAnimationFrame(() => {
+            readerContent.scrollTop = 0;
+            // 3. 再次用 setTimeout 确保 DOM 渲染完毕
+            setTimeout(() => {
+                readerContent.scrollTop = 0;
+            }, 5);
+        });
     }
 
     // ----- 事件绑定 -----
