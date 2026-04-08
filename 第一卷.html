@@ -25,7 +25,6 @@
             color: #111;
         }
 
-        /* 阅读器整体容器 */
         .reader-container {
             display: flex;
             flex-direction: column;
@@ -35,7 +34,6 @@
             padding: 0 1em;
         }
 
-        /* 顶部标题区 */
         .reader-header {
             padding: 1.2em 0 0.5em 0;
             border-bottom: 1px solid #e0d6cc;
@@ -54,7 +52,6 @@
             margin-top: 4px;
         }
 
-        /* 阅读进度条（顶部细线） */
         .progress-bar-container {
             width: 100%;
             height: 3px;
@@ -70,7 +67,6 @@
             transition: width 0.15s;
         }
 
-        /* 阅读区域：固定高度，可滚动，保留原有文本样式 */
         .reader-content {
             flex: 1;
             background: #fefefe;
@@ -83,7 +79,6 @@
             scroll-behavior: smooth;
         }
 
-        /* 页面内容样式：与原有 white-space 等完全一致 */
         .page-content {
             white-space: pre-wrap;
             font-size: 1.1em;
@@ -94,7 +89,6 @@
             margin: 0 0 1.2em 0;
         }
 
-        /* 底部导航栏 */
         .reader-nav {
             display: flex;
             align-items: center;
@@ -164,7 +158,6 @@
             background: #9c5a26;
         }
 
-        /* 移动端适配 */
         @media (max-width: 600px) {
             .reader-content {
                 height: calc(100vh - 220px);
@@ -179,7 +172,6 @@
             }
         }
 
-        /* 隐藏原始文本容器 */
         #raw-text-container {
             display: none;
         }
@@ -188,25 +180,19 @@
 <body>
 
 <div class="reader-container">
-    <!-- 头部信息 -->
     <div class="reader-header">
         <h2>第一卷：曲折跌宕的命运啊，通往何处</h2>
         <div class="sub">· 自动分页 · 页码跳转 ·</div>
     </div>
 
-    <!-- 进度条 -->
     <div class="progress-bar-container">
         <div class="progress-bar-fill" id="progressFill"></div>
     </div>
 
-    <!-- 阅读显示区 -->
     <div class="reader-content" id="readerContent">
-        <div class="page-content" id="pageContent">
-            <!-- 当前页内容由 JavaScript 动态渲染 -->
-        </div>
+        <div class="page-content" id="pageContent"></div>
     </div>
 
-    <!-- 底部导航栏 -->
     <div class="reader-nav">
         <button class="nav-btn" id="prevPageBtn" title="上一页">◀ 上一页</button>
         <div class="page-indicator">
@@ -220,6 +206,7 @@
         <button class="nav-btn" id="nextPageBtn" title="下一页">下一页 ▶</button>
     </div>
 </div>
+
 <div id="raw-text-container">
 
 第一卷：曲折跌宕的命运啊，通往何处
@@ -1335,7 +1322,6 @@
 	一个证月向来少言，一个粟海满口谎话。沉默为他们两个筑起了墙，不知道挡住了些什么，也不知道要挡些什么。
 	月光照在墙内还是墙外呢，谁也不知道。
 	
-    （此处粘贴你的小说全文）
 </div>
 
 <script>
@@ -1353,71 +1339,84 @@
     const progressFill = document.getElementById('progressFill');
     const readerContent = document.getElementById('readerContent');
 
+    // ----- 配置参数：每页目标字符数（可自行调整）-----
+    const CHARS_PER_PAGE = 1800;   // 大约相当于 300~400 个中文字符，可根据需要修改
+
     // ----- 解析原文，分割段落 -----
-    // 获取纯文本（保留原有空格与换行）
     let fullText = rawContainer.innerText || rawContainer.textContent;
-    // 按连续换行（空行）分割段落
+    // 按空行分割段落（保留段落内换行）
     const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
-    
-    // 每页段落数（可根据需要调整，建议14-18）
-    const PARAGRAPHS_PER_PAGE = 14;
-    const totalPages = Math.ceil(paragraphs.length / PARAGRAPHS_PER_PAGE);
-    
+
+    // ----- 按字符数分页（保持段落完整）-----
+    function paginateByChars(paragraphs, charsPerPage) {
+        const pages = [];
+        let currentPageParas = [];
+        let currentCharCount = 0;
+
+        for (let para of paragraphs) {
+            const paraLength = para.length;
+            // 如果当前页加上这个段落后会超过阈值，且当前页非空，则另起一页
+            if (currentCharCount + paraLength > charsPerPage && currentPageParas.length > 0) {
+                pages.push(currentPageParas);
+                currentPageParas = [];
+                currentCharCount = 0;
+            }
+            currentPageParas.push(para);
+            currentCharCount += paraLength;
+        }
+        // 最后一页
+        if (currentPageParas.length > 0) {
+            pages.push(currentPageParas);
+        }
+        return pages;
+    }
+
+    const pages = paginateByChars(paragraphs, CHARS_PER_PAGE);
+    const totalPages = pages.length;
     let currentPage = 1;
 
-    // ----- 渲染指定页 -----
+    // ----- 渲染指定页，并强制滚动到阅读区顶部 -----
     function renderPage(page) {
         // 边界处理
         if (page < 1) page = 1;
         if (page > totalPages) page = totalPages;
         currentPage = page;
 
-        // 计算段落起止索引
-        const start = (page - 1) * PARAGRAPHS_PER_PAGE;
-        const end = Math.min(start + PARAGRAPHS_PER_PAGE, paragraphs.length);
-        const pageParagraphs = paragraphs.slice(start, end);
+        const pageParagraphs = pages[page - 1] || [];
 
-        // 构建 HTML（每个段落用 <p> 包裹，保留原有换行和空格效果）
+        // 构建 HTML：每个段落用 <p> 包裹，保留段落内换行
         let html = '';
         pageParagraphs.forEach(para => {
-            // 将段落内的单个换行转为 <br>，但通常段落内没有换行，以防万一
+            // 将段落内的单个换行转为 <br>，以保证显示效果
             const formatted = para.replace(/\n/g, '<br>');
             html += `<p>${formatted}</p>`;
         });
         pageContent.innerHTML = html;
 
-        // 更新页码显示
+        // 更新页码显示与按钮状态
         pageInput.value = currentPage;
         totalSpan.textContent = totalPages;
-
-        // 更新按钮状态
         prevBtn.disabled = (currentPage === 1);
         nextBtn.disabled = (currentPage === totalPages);
+        progressFill.style.width = (currentPage / totalPages) * 100 + '%';
 
-        // 更新顶部进度条（按页码比例）
-        const progressPercent = (currentPage / totalPages) * 100;
-        progressFill.style.width = progressPercent + '%';
-
-        // 滚动阅读区到顶部
-        readerContent.scrollTop = 0;
+        // 强制滚动到阅读区顶部
+        setTimeout(() => {
+            readerContent.scrollTo({
+                top: 0,
+                behavior: 'auto'
+            });
+        }, 0);
     }
 
     // ----- 事件绑定 -----
-    // 上一页
     prevBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            renderPage(currentPage - 1);
-        }
+        if (currentPage > 1) renderPage(currentPage - 1);
     });
-
-    // 下一页
     nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages) {
-            renderPage(currentPage + 1);
-        }
+        if (currentPage < totalPages) renderPage(currentPage + 1);
     });
 
-    // 页码跳转
     function jumpToPage() {
         let target = parseInt(pageInput.value, 10);
         if (isNaN(target) || target < 1) target = 1;
@@ -1426,23 +1425,18 @@
     }
     goBtn.addEventListener('click', jumpToPage);
     pageInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            jumpToPage();
-        }
+        if (e.key === 'Enter') jumpToPage();
     });
 
-    // 初始化：如果没有段落则显示提示
+    // ----- 初始化 -----
     if (paragraphs.length === 0) {
         pageContent.innerHTML = '<p style="color:#888; text-align:center; padding:2em;">请将小说原文粘贴到隐藏区域。</p>';
         totalSpan.textContent = '0';
         prevBtn.disabled = true;
         nextBtn.disabled = true;
     } else {
-        // 渲染第一页
         renderPage(1);
     }
-
-    // 可选：窗口大小变化时，保持阅读区可用（无需额外操作）
 })();
 </script>
 
