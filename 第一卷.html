@@ -13,21 +13,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>第一卷 · 曲折跌宕的命运</title>
     <style>
-        /* ========== 以下为您的原始样式，完全未改动 ========== */
+        /* ========== 原始样式（仅将顶部margin改为0，其他完全保留） ========== */
         body {
             white-space: pre-wrap;
             font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
             font-size: 1.1em;
             line-height: 1.6;
             max-width: 800px;
-            margin: 2em auto;
+            margin: 0 auto 2em auto;   /* 顶部空白已去除，底部保留原2em */
             padding: 0 1em;
             background: #fefefe;
             color: #111;
         }
         /* ========== 原始样式结束 ========== */
 
-        /* 新增分页导航栏样式，与您的风格协调（不影响原有内容） */
+        /* 分页导航栏（与您的风格协调，不影响原有内容） */
         .pagination-bar {
             display: flex;
             align-items: center;
@@ -98,10 +98,10 @@
 </head>
 <body>
 
-<!-- ********** 阅读内容渲染区（保留您的 white-space 等样式） ********** -->
+<!-- 阅读内容渲染区（继承 white-space 等全部原有样式） -->
 <div id="novel-content"></div>
 
-<!-- ********** 分页导航栏 ********** -->
+<!-- 分页导航栏 -->
 <div class="pagination-bar" id="paginationBar">
     <button class="pagination-btn" id="prevPageBtn">◀ 上一页</button>
     <div class="page-jump">
@@ -114,6 +114,7 @@
 </div>
 
 <div id="raw-text-source">
+
 
 第一卷：曲折跌宕的命运啊，通往何处
 
@@ -1243,10 +1244,10 @@
     const totalSpan = document.getElementById('totalPagesSpan');
     const goBtn = document.getElementById('goPageBtn');
 
-    // ----- 配置：每页字符数（可自行调节） -----
+    // ----- 配置：每页字符数（可自行调节，建议 4000~6000）-----
     const CHARS_PER_PAGE = 4500;
 
-    // ----- 获取并解析原文（按空行分段落）-----
+    // ----- 解析原文（按空行分段落）-----
     let fullText = sourceDiv.innerText || sourceDiv.textContent;
     const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
 
@@ -1273,14 +1274,14 @@
     const totalPages = pages.length;
     let currentPage = 1;
 
-    // ----- 渲染指定页（完全保留原有 white-space 等样式）-----
+    // ----- 渲染指定页，并强制滚动到页面顶部 -----
     function renderPage(page) {
         if (page < 1) page = 1;
         if (page > totalPages) page = totalPages;
         currentPage = page;
 
         const pageParas = pages[page - 1] || [];
-        // 构建 HTML：段落之间用空行隔开，以保持原有间距效果
+        // 段落之间用两个换行（即一个空行）隔开，保持原有间距视觉效果
         let html = pageParas.map(para => para.replace(/\n/g, '<br>')).join('\n\n');
         contentDiv.innerHTML = html;
 
@@ -1290,12 +1291,10 @@
         prevBtn.disabled = (currentPage === 1);
         nextBtn.disabled = (currentPage === totalPages);
 
-        // ★ 强制滚动到页面顶部（多重保障，不依赖 smooth 行为）
-        // 直接操作滚动位置
+        // ★ 强制滚动到页面顶部（多重保障）
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
-        // 再次保障（某些浏览器异步渲染问题）
         requestAnimationFrame(() => {
             window.scrollTo(0, 0);
             document.documentElement.scrollTop = 0;
