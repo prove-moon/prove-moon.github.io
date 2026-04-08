@@ -27,6 +27,122 @@
     </style>
 </head>
 <body>
+
+<!-- 阅读进度条（顶部细线） -->
+<div id="progress-bar-container">
+    <div id="progress-bar-fill"></div>
+</div>
+
+<!-- 右下角工具组 -->
+<div class="reading-toolbar">
+    <button id="saveProgressBtn" title="保存当前阅读位置">📌 保存进度</button>
+    <button id="loadProgressBtn" title="跳转到上次保存的位置">📍 加载进度</button>
+    <button id="scrollTopBtn" title="回到顶部">⬆️ 顶部</button>
+</div>
+
+<!-- 轻提示浮层 -->
+<div id="reading-toast"></div>
+
+<!-- ************ 小说原文 ************ -->
+<!-- 请将你原来的小说全文粘贴在此处，我会保留原有排版 -->
+<!-- ================================= -->
+
+<script>
+(function() {
+    "use strict";
+
+    // ---------- 元素 ----------
+    const progressFill = document.getElementById('progress-bar-fill');
+    const toastEl = document.getElementById('reading-toast');
+    const saveBtn = document.getElementById('saveProgressBtn');
+    const loadBtn = document.getElementById('loadProgressBtn');
+    const topBtn = document.getElementById('scrollTopBtn');
+
+    // 存储键名
+    const STORAGE_KEY = 'novel_scroll_position_vol1';
+
+    // ---------- 通用 Toast ----------
+    function showToast(text, duration = 2000) {
+        toastEl.textContent = text;
+        toastEl.classList.add('show');
+        clearTimeout(window.toastTimer);
+        window.toastTimer = setTimeout(() => {
+            toastEl.classList.remove('show');
+        }, duration);
+    }
+
+    // ---------- 更新顶部进度条 ----------
+    function updateProgressBar() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) {
+            progressFill.style.width = '0%';
+            return;
+        }
+        const percent = (scrollTop / docHeight) * 100;
+        progressFill.style.width = percent + '%';
+    }
+
+    // ---------- 保存滚动位置 ----------
+    function saveScrollPosition() {
+        const pos = window.scrollY || document.documentElement.scrollTop;
+        try {
+            localStorage.setItem(STORAGE_KEY, pos);
+            showToast(`📖 进度已保存 (${Math.round(pos)}px)`, 1800);
+        } catch (e) {
+            showToast('❌ 保存失败，存储异常', 1500);
+        }
+    }
+
+    // ---------- 加载滚动位置并滚动 ----------
+    function loadScrollPosition() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved === null) {
+            showToast('⚠️ 还没有保存过进度', 1500);
+            return;
+        }
+        const pos = parseInt(saved, 10);
+        if (isNaN(pos)) return;
+
+        // 平滑滚动到保存位置
+        window.scrollTo({
+            top: pos,
+            behavior: 'smooth'
+        });
+        showToast(`📍 已跳转到上次阅读位置`, 1600);
+    }
+
+    // ---------- 回到顶部 ----------
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        showToast('⬆️ 返回顶部', 1000);
+    }
+
+    // ---------- 绑定事件 ----------
+    window.addEventListener('scroll', () => {
+        updateProgressBar();
+    });
+
+    saveBtn.addEventListener('click', saveScrollPosition);
+    loadBtn.addEventListener('click', loadScrollPosition);
+    topBtn.addEventListener('click', scrollToTop);
+
+    // 页面加载完成时先更新一次进度条
+    window.addEventListener('load', () => {
+        updateProgressBar();
+    });
+
+    // 可选：页面内点击链接（如果有锚点）不影响进度条更新
+    // 同时当窗口大小改变时，文档高度变化，更新进度条
+    window.addEventListener('resize', () => {
+        updateProgressBar();
+    });
+
+})();
+</script>
 第一卷：曲折跌宕的命运啊，通往何处
 
 	
