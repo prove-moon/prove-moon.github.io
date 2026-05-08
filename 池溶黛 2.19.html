@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8V4XWX4J1Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8V4XWX4J1Q');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>第一卷 · 曲折跌宕的命运</title>
+    <style>
+        /* ========== 原始样式（仅将顶部margin改为0，其他完全保留） ========== */
+        body {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 2em auto;   /* 顶部空白已去除，底部保留原2em */
+            padding: 0 1em;
+            background: #fefefe;
+            color: #111;
+        }
+        /* ========== 原始样式结束 ========== */
+
+        /* 分页导航栏（与您的风格协调，不影响原有内容） */
+        .pagination-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 2.5em 0 1.5em;
+            padding-top: 1.2em;
+            border-top: 1px solid #e0d6cc;
+            font-family: inherit;
+        }
+        .pagination-btn {
+            background: #f5ede5;
+            border: 1px solid #d6c9be;
+            border-radius: 30px;
+            padding: 6px 18px;
+            font-size: 1rem;
+            color: #3e2e23;
+            cursor: pointer;
+            transition: 0.15s;
+            min-width: 85px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .pagination-btn:hover {
+            background: #e7dbd0;
+            border-color: #b7a392;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f5ede5;
+            box-shadow: none;
+        }
+        .page-jump {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .page-input {
+            width: 70px;
+            padding: 5px 8px;
+            border: 1px solid #ccc5bc;
+            border-radius: 24px;
+            text-align: center;
+            font-size: 1rem;
+            background: white;
+            font-family: inherit;
+        }
+        .go-btn {
+            background: #b76e2e;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 5px 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: 1px solid #9c5a26;
+            transition: 0.15s;
+        }
+        .go-btn:hover {
+            background: #9c5a26;
+        }
+
+        /* 隐藏原始文本容器 */
+        #raw-text-source {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 阅读内容渲染区（继承 white-space 等全部原有样式） -->
+<div id="novel-content"></div>
+
+<!-- 分页导航栏 -->
+<div class="pagination-bar" id="paginationBar">
+    <button class="pagination-btn" id="prevPageBtn">◀ 上一页</button>
+    <div class="page-jump">
+        <span>第</span>
+        <input type="number" id="pageInput" class="page-input" min="1" value="1">
+        <span>/ <span id="totalPagesSpan">1</span> 页</span>
+        <button class="go-btn" id="goPageBtn">跳转</button>
+    </div>
+    <button class="pagination-btn" id="nextPageBtn">下一页 ▶</button>
+</div>
+
+<div id="raw-text-source">
+	我的名字是池溶黛。
+	我在药城出生。
+	我的父母都是平民，他们说那年收成好，正好又生下了我，所以我要过上好日子了。
+	他们说的好日子就是四五天能吃上一次肉，每顿都能吃饱，出门也有衣服穿，的确，别人家的小孩可能没有衣服穿，他们会冷，没有东西吃，他们会饿。
+	我有衣服穿，有东西吃。
+	所以我不冷也不饿。
+	我在三岁前是没有什么意识的，但后来他们总是说这是“黄金三年”，后来的收成就没有那么好了。
+	我五岁的时候，母亲生了一个弟弟。弟弟刚出生的那几天，父亲和母亲都总是笑，所以我也跟着笑。
+	从那之后，所谓的“黄金三年”就过去了，地里长出来的那些药一年比一年少了。
+	七岁那年，我也跟着去种地。
+	七岁之前，我的生活就只有孩童的生活，在药城里跑来跑去，城东到城西，城南到城北。
+	白天下河游泳，晚上去东边的盒老瓜加里去偷瓜。
+	盒老瓜家里是种盒瓜的，全城只有他一个人种盒瓜。盒瓜四四方方的，两拳长一拳宽，有黄的也有绿的，炼不了药，就只能拿来吃，但长得特别快，也不分季节，一年能熟四次，春夏秋冬的盒瓜味道都不一样。
+	所以盒老瓜不一样，别人直接种药，他是种了瓜拿去卖，再换成药。
+	“黄金三年”的时候，大家手里的药都多，总有人买他的盒瓜，盒瓜熟了时候，清晨盒老瓜就每天推了车，载了一大批一大批的盒瓜出去卖，到了晚上，盒老瓜推回来的就是一大车的药了。
+	也有人学着他想种盒瓜，但没一个种活的，他们种的盒瓜总是长到一半就在空中炸开，泄了一地的汁水。
+	所以我们这些小孩总爱偷盒老瓜的瓜田。
+	拣一个月黑风高的晚上，几个小孩从西边摸进去，右手摘了盒瓜，左手一捧，一会儿怀里就被盒瓜占满了。
+	偷的时候要注意的倒不是盒老瓜本人，倒是地里养的那只狗，狗不能吃盒瓜，拿来看守盒瓜地正好。
+	狗撵出来的时候，就得赶紧从西边或是南边翻出去了——这两边狗都出不去。
+	我和其他孩子不一样，他们只是偷，我是低价收购。
+	狗最爱吃芦萦，我家就是种芦萦的，芦萦是最便宜的。
+	去的时候带了一大捧芦萦喂给狗吃，回来的就是一大捧盒瓜了。
+	再后来，其他孩子基本都被盒老瓜逮了一遭，我没有被逮过。因为那狗看了我不叫，只是摇尾巴要芦萦吃。
+	但一来二去，盒老瓜还是发现地里的盒瓜不见了，蹲了几个晚上。
+	有一天我在喂狗吃芦萦，盒老瓜的黑影从头上笼下来。
+	盒老瓜也没说什么，只是由着我继续喂狗偷瓜了。
+	
+	说回到七岁那年，我也得下地种田。
+	按道理我也该种芦萦，但我觉得芦萦廉价，就是些喂狗吃的东西，不该种。
+	所以我去找盒老瓜，问他怎么种盒瓜。
+	盒老瓜以前从不和别人讲怎么种盒瓜，别人种他不拦着，只是算算日子，到了对方的盒瓜要炸开的时候，他就搬一把板凳坐在别人的瓜田附近，看着那些盒瓜炸开。
+	可盒老瓜偏偏跟我讲了，兴许是因为我偷过他的瓜。
+	盒瓜长到一个月的时候果肉一直长，外面的皮却不长了，不去处理自然炸——这本是盒瓜正常的规律，直接摘下来吃也不行，那时的盒瓜苦涩恶心。但要是在一个月的时候剖开盒瓜的茎，每天用针往里面注水，这问题就解决了。
+	问到为什么，盒老瓜也说不出缘由，说是灵城的人告诉他的。
+	
+	自那之后，我家也种上了盒瓜，瓜田不大，毕竟只有我一人种。
+	“黄金三年”毕竟只有三年，不会再出现什么“白银三年”了。
+	日子一天天过去，收成却一年差过一年。
+	买盒瓜的人越来越少，实在卖不出去的，我们就只好自己吃了。
+	到了我十岁那年，连绵的灾害，地里长出来的东西实不存一。那时所有人的脸色都不好看，在药城，没了收成就是奔向死亡。
+	后来，便听说去了灵城的那帮人打输了，什么也没有带回来，反倒回来了开始抢我们，挨家挨户搜过去，有吃的就全部带走。
+	母亲废了好大劲，才藏下来一些食物，水缸底下的，床板下面的全都被搜走了，只有放在炉灶内里的顶上的几袋米没被搜走。
+	我们家的情况其实还能说的过去，邻居家的男人去打那些兵，反倒给一刀砍死了，家里的食物也没留下。不过好在是少了一张嘴吃饭，活下去的机会也大一些。
+	父亲倒还算聪明，刚被抢完就招呼了一家人去外面砍野草，扒树皮，能吃的，可能能吃的全薅回家里来。
+	再过了几天，其他人就开始抢树皮了，要是抢不赢的，都只能吃鞋底子了。
+	父母叫我和弟弟不要再出门了，乖乖躺在床上，少费些力气。
+	我问他：“阿兰呢？”
+	阿兰是常和我去偷瓜的伙伴。
+	父亲想了想，摸了摸下巴：
+	“被吃了。”
+	“我也会被吃吗？”
+	父亲紧紧地勒了勒他绑在腰间的带子：
+	“不会……的”
+
+	后来我听父母说，盒老瓜死了，是他养的那条大狗太饿了，放着满屋的盒瓜没有动，活生生把他咬死了。
+
+	我还是逃不过饥荒这一劫，一天天吃不上东西，身上都水肿起来，一按一个坑。
+	父母聊的剩下无非两种话题
+	一种是“鹈鴂军听说要来了，不知什么时候才能打过来，那是支好军队。“
+	另一种是：“西头那家要和我们换黛儿。“
+	他们说的不大声，但我却听得很真切。
+	我不想被吃，但是我逃不了，我只剩下躺在床上的力气了。
+	
+	我挺不住了，然后我就昏了过去。
+	隐约间，我感到我被抱着，身体被晃动着。
+	我不知道过了多久，但大抵是要死了，和我之前预想的一样。
+	但或许是我命不该绝，在无尽的黑暗里，我的眼前出现了一行文字。
+	一半金色，一半流血。
+	【虚情】：你失去所有情感，但你可以放大别人心中的情感。
+	我的脖子一凉——我的头被砍下了。
+	然后我睁开了眼，我本以为这是临死前的走马灯，但好像不是，我攥紧的左手手心里传来了一股力量，吊住了我的命，让我不至于立即死去。
+	这或许就是传说中的【神咒】吧，它说我失去了情感，但是我却觉得我没有失去什么。
+	这所谓的情感，是什么呢？
+	我定了定眼神，这里不是我的家，想必是我被交换的地方吧。
+	我看着一个男人在那里烧水，一个男人把我的父亲打得连连败退，一个女人看守着我。
+	我想不清楚这是发生了什么。
+	但那扇门却被人猛地打开，那人穿一身黑色军服，一手接住了我的父亲，一手亮出了他的剑，指着屋里的人。
+	那剑很光亮，流动着紫色的光点，一下子给灰暗的屋子里带来了一些色彩。
+	我只是在想：
+	他是来救我的吗？
+
+</div>
+
+<script>
+(function() {
+    "use strict";
+
+    // ----- 获取元素 -----
+    const sourceDiv = document.getElementById('raw-text-source');
+    const contentDiv = document.getElementById('novel-content');
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+    const pageInput = document.getElementById('pageInput');
+    const totalSpan = document.getElementById('totalPagesSpan');
+    const goBtn = document.getElementById('goPageBtn');
+
+    // ----- 配置：每页字符数（可自行调节，建议 4000~6000）-----
+    const CHARS_PER_PAGE = 4500;
+
+    // ----- 解析原文（按空行分段落）-----
+    let fullText = sourceDiv.innerText || sourceDiv.textContent;
+    const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
+
+    // 按字符数分页，不截断段落
+    function paginateByChars(paras, charsPerPage) {
+        const pages = [];
+        let currentPageParas = [];
+        let currentCharCount = 0;
+        for (let para of paras) {
+            const paraLen = para.length;
+            if (currentCharCount + paraLen > charsPerPage && currentPageParas.length > 0) {
+                pages.push(currentPageParas);
+                currentPageParas = [];
+                currentCharCount = 0;
+            }
+            currentPageParas.push(para);
+            currentCharCount += paraLen;
+        }
+        if (currentPageParas.length > 0) pages.push(currentPageParas);
+        return pages;
+    }
+
+    const pages = paginateByChars(paragraphs, CHARS_PER_PAGE);
+    const totalPages = pages.length;
+    let currentPage = 1;
+
+    // ----- 渲染指定页，并强制滚动到页面顶部 -----
+    function renderPage(page) {
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+        currentPage = page;
+
+        const pageParas = pages[page - 1] || [];
+        // 段落之间用两个换行（即一个空行）隔开，保持原有间距视觉效果
+        let html = pageParas.map(para => para.replace(/\n/g, '<br>')).join('\n\n');
+        contentDiv.innerHTML = html;
+
+        // 更新导航状态
+        pageInput.value = currentPage;
+        totalSpan.textContent = totalPages;
+        prevBtn.disabled = (currentPage === 1);
+        nextBtn.disabled = (currentPage === totalPages);
+
+        // ★ 强制滚动到页面顶部（多重保障）
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        requestAnimationFrame(() => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        });
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }, 10);
+    }
+
+    // ----- 事件绑定 -----
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) renderPage(currentPage - 1);
+    });
+    nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) renderPage(currentPage + 1);
+    });
+
+    function jumpToPage() {
+        let target = parseInt(pageInput.value, 10);
+        if (isNaN(target) || target < 1) target = 1;
+        if (target > totalPages) target = totalPages;
+        renderPage(target);
+    }
+    goBtn.addEventListener('click', jumpToPage);
+    pageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') jumpToPage();
+    });
+
+    // ----- 初始化 -----
+    if (paragraphs.length === 0) {
+        contentDiv.innerHTML = '<p style="color:#888; text-align:center; padding:2em;">请将小说原文粘贴到隐藏区域。</p>';
+        totalSpan.textContent = '0';
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+    } else {
+        renderPage(1);
+    }
+})();
+</script>
+
+</body>
+</html>
