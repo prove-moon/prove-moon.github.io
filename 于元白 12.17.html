@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8V4XWX4J1Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8V4XWX4J1Q');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>第一卷 · 曲折跌宕的命运</title>
+    <style>
+        /* ========== 原始样式（仅将顶部margin改为0，其他完全保留） ========== */
+        body {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 2em auto;   /* 顶部空白已去除，底部保留原2em */
+            padding: 0 1em;
+            background: #fefefe;
+            color: #111;
+        }
+        /* ========== 原始样式结束 ========== */
+
+        /* 分页导航栏（与您的风格协调，不影响原有内容） */
+        .pagination-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 2.5em 0 1.5em;
+            padding-top: 1.2em;
+            border-top: 1px solid #e0d6cc;
+            font-family: inherit;
+        }
+        .pagination-btn {
+            background: #f5ede5;
+            border: 1px solid #d6c9be;
+            border-radius: 30px;
+            padding: 6px 18px;
+            font-size: 1rem;
+            color: #3e2e23;
+            cursor: pointer;
+            transition: 0.15s;
+            min-width: 85px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .pagination-btn:hover {
+            background: #e7dbd0;
+            border-color: #b7a392;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f5ede5;
+            box-shadow: none;
+        }
+        .page-jump {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .page-input {
+            width: 70px;
+            padding: 5px 8px;
+            border: 1px solid #ccc5bc;
+            border-radius: 24px;
+            text-align: center;
+            font-size: 1rem;
+            background: white;
+            font-family: inherit;
+        }
+        .go-btn {
+            background: #b76e2e;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 5px 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: 1px solid #9c5a26;
+            transition: 0.15s;
+        }
+        .go-btn:hover {
+            background: #9c5a26;
+        }
+
+        /* 隐藏原始文本容器 */
+        #raw-text-source {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 阅读内容渲染区（继承 white-space 等全部原有样式） -->
+<div id="novel-content"></div>
+
+<!-- 分页导航栏 -->
+<div class="pagination-bar" id="paginationBar">
+    <button class="pagination-btn" id="prevPageBtn">◀ 上一页</button>
+    <div class="page-jump">
+        <span>第</span>
+        <input type="number" id="pageInput" class="page-input" min="1" value="1">
+        <span>/ <span id="totalPagesSpan">1</span> 页</span>
+        <button class="go-btn" id="goPageBtn">跳转</button>
+    </div>
+    <button class="pagination-btn" id="nextPageBtn">下一页 ▶</button>
+</div>
+
+<div id="raw-text-source">
+	他们都说我是个疯子。
+  我不想对此做什么辩护，也不想做什么评判。
+  我只会用一段略显漫长而无趣的独白来说我的过去——一些或许已经在我的梦境里消散或是在另一个世界里被丢弃的记忆——若是这场独白有几位忠实的听众的话，我向你们致以敬意。
+  
+  我叫于元白。
+  我大抵是个命城人吧，我记不清太多那些对我而言及其遥远的过去了，或许我的这些过去有一部分只是我自以为是的幻想，那也没有什么办法，那就是我所接受的我的过去。
+  按照人们最好接受的时间顺序，我应该从我的童年讲起。这也是大多数神咒的拥有者所偏好的，童年是他们人生中唯一没有神咒“缠身”的时间。或许他们厌恶神咒，或是别的什么感觉。
+  我不一样，我实在不爱去回忆我的童年，没有什么扎心的痛苦，也没有什么如蜜的欢乐，只有死水一般的平淡，很普通很普通以至于再普通不过的一个童年。
+  不过出于一个故事的完整性，我需要讲述这一段童年，从中挑拣出那么一些我认为值得讲述的，历史或许容易刻录的——当然这么说有些过分，没有什么直接的证据能证明我能够被历史记住，只是我的一厢情愿罢了。
+  好了，我总是说这些冗长的话，还请各位谅解。
+  
+  童年时的命城和饰命，绝不是像命城的最后一次饰命那样浩大而疯狂，那些饰命是平淡的，我一直都是坐在父亲的酒馆里默默的看书，偶尔会有几个神咒者进来酒馆里，开始他们尴尬而无厘头的饰命——通常是某些童话里或是无趣的言情小说里的戏码，远远比不上我手里的书来得有趣。
+  偶有父亲的店忙不过来的情况，我就得被迫放下手里的书，去充当一会儿店里的小二。说实话，我确实不擅长也不喜欢这份工作，每次我总是认为这是一项很无所谓的体力劳动，硬生生占据了我用于翻书的双手来迫使我的大脑从书中的世界推出来。
+  于是我总是把自己的脑子又放回我所爱的世界里，我那是爱看些《快柳杂记》、《虚江外》这样的散书，不算什么深刻的，但是富有想象力的。我会试着一边听顾客的那些请求，一边想着虚江底的大鱼，眼睛还看着几个饰命者无趣的表演——这种一心多用是我所喜欢的，但不是我所擅长的——我的脑子总是记着的是那条大鱼，却老是忘记顾客的要求。
+  大多数要求我还是能记住的，偏偏是有一次，我完全忘记了顾客点的是几大杯南江酒而不是雾汁，我见雾汁已经没了，就又新榨了几大杯出来。等端到桌上时，才换来了好一通臭骂。
+  那些人骂的很难听，不过我也不记得了，毕竟几句骂声也没办法把我从书里的世界里拔出来。后来那一大桌顾客没了兴致，南江酒也不要了，在整个店里骂骂咧咧的就出去了，他们在门外好像骂了很久，骂的好像十里八乡都要知道我们家的酒馆有个不长脑子的，连南江酒和雾汁都搞不清楚。
+  那天也没有人点雾汁了，那几杯雾汁就剩下了，父亲也实在气不过，等没了顾客了就揪着我的耳朵。但他没多做什么，只是揪我的耳朵揪了好久，也不骂我，也没再出手——他也读过些书，知道孩子不该打，否则我也没有那么多书看了。
+  过了好久，他才松开了我的耳朵，让我自己解决那几杯雾汁。
+  那天晚上，我坐在一张桌上，坐了很久，把《虚江外》从头到尾看了个完，每看完一大段，我就喝一杯雾汁，把那些氤氲着的雾气和那些神奇的想象都一并吞进我的肚子里。
+  我也记不清我一共喝了多少杯，就是一直喝，喝到很晚很晚。偏偏雾汁喝多了又容易一直打嗝，关了书，我躺在床上一个劲的打嗝，在床上瞪着眼睛看着黑漆漆的房间，一直看到了第二天早上。
+  自那之后，我就爱上了喝雾汁，几乎是我一生的习惯了。
+  
+  那天过后大概一个月，我父亲就死了。
+  那几日他把我丢下，闭店几日，说是要去灵城见朋友。后来就只听说他死了，有说他是走久木廊被老虎咬死了，也有说是路上被药城的流寇打死的，更玄乎的说他是坐船时醉酒，去捞虚江里的月亮翻了船死的。
+  总而言之，他的确是死了，没人看到他的尸首，大概也没人认得出来吧。
+  我应该哭了一场，哭了好久。
+  那场大哭之后，我拥有了我的神咒【**】，一个********,********的神咒。
+  别人都说，神咒神咒，咒字托底，归根到底是个诅咒。我不这么觉得，毕竟这样的能力，如果我不用，那就绝不会是个诅咒，那只是一场交易。
+  我没去动我的神咒，只是由着咒火在我手上安静地燃烧着。
+  父亲死了，他的酒馆自然也就归了我——我自记事起，就没有母亲的印象，她死在生我的时候。
+  我自认自己开不了酒馆，我没那么善于言辞，也不擅于招待客人，更别说我搞混的南江酒和雾汁了。
+  于是我把家里的酒馆卖了，那酒馆的位置不错，平日里生意也好，很快就有了买家。
+  我得了好大一笔钱，不过那牌匾也换作了乡其酒馆。
+  不过这酒馆我也没全卖，我把用来榨雾汁的雾莲留下了，雾莲放得越久榨出来的雾汁越好，我买了个大的登山包，装了我能装下的所有的雾莲，带了我身上所有的钱，不过钱我留了一点在老板那里等我回来喝酒，最后再装了几本我没看过的书。
+  我打算出远门看看，看看外面的世界和书里写得一不一样。
+  我知道我带的行李很荒唐，哪有人带一包雾莲出门呢？
+  不过我离不开雾莲。
+  
+  好像到了现在，我才堪堪讲完我那无趣的童年，或许接下来的故事，我的印象会深刻一些，不过也许会夹杂了更多某些误解。
+  离了命城，我就往东南走。
+  东南边的第一座城市是【药城】。
+
+</div>
+
+<script>
+(function() {
+    "use strict";
+
+    // ----- 获取元素 -----
+    const sourceDiv = document.getElementById('raw-text-source');
+    const contentDiv = document.getElementById('novel-content');
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+    const pageInput = document.getElementById('pageInput');
+    const totalSpan = document.getElementById('totalPagesSpan');
+    const goBtn = document.getElementById('goPageBtn');
+
+    // ----- 配置：每页字符数（可自行调节，建议 4000~6000）-----
+    const CHARS_PER_PAGE = 4500;
+
+    // ----- 解析原文（按空行分段落）-----
+    let fullText = sourceDiv.innerText || sourceDiv.textContent;
+    const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
+
+    // 按字符数分页，不截断段落
+    function paginateByChars(paras, charsPerPage) {
+        const pages = [];
+        let currentPageParas = [];
+        let currentCharCount = 0;
+        for (let para of paras) {
+            const paraLen = para.length;
+            if (currentCharCount + paraLen > charsPerPage && currentPageParas.length > 0) {
+                pages.push(currentPageParas);
+                currentPageParas = [];
+                currentCharCount = 0;
+            }
+            currentPageParas.push(para);
+            currentCharCount += paraLen;
+        }
+        if (currentPageParas.length > 0) pages.push(currentPageParas);
+        return pages;
+    }
+
+    const pages = paginateByChars(paragraphs, CHARS_PER_PAGE);
+    const totalPages = pages.length;
+    let currentPage = 1;
+
+    // ----- 渲染指定页，并强制滚动到页面顶部 -----
+    function renderPage(page) {
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+        currentPage = page;
+
+        const pageParas = pages[page - 1] || [];
+        // 段落之间用两个换行（即一个空行）隔开，保持原有间距视觉效果
+        let html = pageParas.map(para => para.replace(/\n/g, '<br>')).join('\n\n');
+        contentDiv.innerHTML = html;
+
+        // 更新导航状态
+        pageInput.value = currentPage;
+        totalSpan.textContent = totalPages;
+        prevBtn.disabled = (currentPage === 1);
+        nextBtn.disabled = (currentPage === totalPages);
+
+        // ★ 强制滚动到页面顶部（多重保障）
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        requestAnimationFrame(() => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        });
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }, 10);
+    }
+
+    // ----- 事件绑定 -----
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) renderPage(currentPage - 1);
+    });
+    nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) renderPage(currentPage + 1);
+    });
+
+    function jumpToPage() {
+        let target = parseInt(pageInput.value, 10);
+        if (isNaN(target) || target < 1) target = 1;
+        if (target > totalPages) target = totalPages;
+        renderPage(target);
+    }
+    goBtn.addEventListener('click', jumpToPage);
+    pageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') jumpToPage();
+    });
+
+    // ----- 初始化 -----
+    if (paragraphs.length === 0) {
+        contentDiv.innerHTML = '<p style="color:#888; text-align:center; padding:2em;">请将小说原文粘贴到隐藏区域。</p>';
+        totalSpan.textContent = '0';
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+    } else {
+        renderPage(1);
+    }
+})();
+</script>
+
+</body>
+</html>
