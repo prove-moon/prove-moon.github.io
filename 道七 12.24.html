@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8V4XWX4J1Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8V4XWX4J1Q');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>道七</title>
+    <style>
+        /* ========== 原始样式（仅将顶部margin改为0，其他完全保留） ========== */
+        body {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 2em auto;   /* 顶部空白已去除，底部保留原2em */
+            padding: 0 1em;
+            background: #fefefe;
+            color: #111;
+        }
+        /* ========== 原始样式结束 ========== */
+
+        /* 分页导航栏（与您的风格协调，不影响原有内容） */
+        .pagination-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 2.5em 0 1.5em;
+            padding-top: 1.2em;
+            border-top: 1px solid #e0d6cc;
+            font-family: inherit;
+        }
+        .pagination-btn {
+            background: #f5ede5;
+            border: 1px solid #d6c9be;
+            border-radius: 30px;
+            padding: 6px 18px;
+            font-size: 1rem;
+            color: #3e2e23;
+            cursor: pointer;
+            transition: 0.15s;
+            min-width: 85px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .pagination-btn:hover {
+            background: #e7dbd0;
+            border-color: #b7a392;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f5ede5;
+            box-shadow: none;
+        }
+        .page-jump {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .page-input {
+            width: 70px;
+            padding: 5px 8px;
+            border: 1px solid #ccc5bc;
+            border-radius: 24px;
+            text-align: center;
+            font-size: 1rem;
+            background: white;
+            font-family: inherit;
+        }
+        .go-btn {
+            background: #b76e2e;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 5px 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: 1px solid #9c5a26;
+            transition: 0.15s;
+        }
+        .go-btn:hover {
+            background: #9c5a26;
+        }
+
+        /* 隐藏原始文本容器 */
+        #raw-text-source {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 阅读内容渲染区（继承 white-space 等全部原有样式） -->
+<div id="novel-content"></div>
+
+<!-- 分页导航栏 -->
+<div class="pagination-bar" id="paginationBar">
+    <button class="pagination-btn" id="prevPageBtn">◀ 上一页</button>
+    <div class="page-jump">
+        <span>第</span>
+        <input type="number" id="pageInput" class="page-input" min="1" value="1">
+        <span>/ <span id="totalPagesSpan">1</span> 页</span>
+        <button class="go-btn" id="goPageBtn">跳转</button>
+    </div>
+    <button class="pagination-btn" id="nextPageBtn">下一页 ▶</button>
+</div>
+
+<div id="raw-text-source">
+	呜————”
+	长鸣笛将荒野击穿了三秒。
+	父亲右脚一踩，炉门“咔”地弹开。
+	我把最后一铲煤炭均匀地撒在了火床的边缘——我已经干了不久的司炉了，撒煤定要撒在火床的边缘，这才能充分燃烧。
+	新煤进了炉里，瞬间就被焖出浓浊的黄色煤烟，烟来不及散开，就被全部吸到中心去，在白炽的火心里猛烈地燃烧起来。
+	“嘭！”
+  炉门关上了。
+	我顺手抄起一条毛巾擦汗——机车三分钟后进站，这是最后一个空当。 
+	趁着这一点空当，我看了看窗外。
+	昨晚刚刚下的暴风雪，好在现在已经停了，只留下白茫茫的旷野，几颗裹了银的行道树，还有这辆踏破雪国的列车。
+	我低头看了下手里的表。
+	比原本预计到达的时间晚了三分三十秒，这是意料之中的，暴风雪过后的行车总要多加小心。
+	“呜————“
+	六秒的长鸣笛，这次是进站的预告了。
+	“准备进站，注意停车！“
+	“准备进站，注意停车！“
+	我跟着父亲复诵。
+	父亲抬起头，两手擎住上方的手轮，用力旋转。
+	“关气完成！“
+	我一手拍停了注水器，瞥了眼火箱，。
+	“汽门关闭！“
+
+
+</div>
+
+<script>
+(function() {
+    "use strict";
+
+    // ----- 获取元素 -----
+    const sourceDiv = document.getElementById('raw-text-source');
+    const contentDiv = document.getElementById('novel-content');
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+    const pageInput = document.getElementById('pageInput');
+    const totalSpan = document.getElementById('totalPagesSpan');
+    const goBtn = document.getElementById('goPageBtn');
+
+    // ----- 配置：每页字符数（可自行调节，建议 4000~6000）-----
+    const CHARS_PER_PAGE = 4500;
+
+    // ----- 解析原文（按空行分段落）-----
+    let fullText = sourceDiv.innerText || sourceDiv.textContent;
+    const paragraphs = fullText.split(/\n\s*\n/).filter(p => p.trim() !== '');
+
+    // 按字符数分页，不截断段落
+    function paginateByChars(paras, charsPerPage) {
+        const pages = [];
+        let currentPageParas = [];
+        let currentCharCount = 0;
+        for (let para of paras) {
+            const paraLen = para.length;
+            if (currentCharCount + paraLen > charsPerPage && currentPageParas.length > 0) {
+                pages.push(currentPageParas);
+                currentPageParas = [];
+                currentCharCount = 0;
+            }
+            currentPageParas.push(para);
+            currentCharCount += paraLen;
+        }
+        if (currentPageParas.length > 0) pages.push(currentPageParas);
+        return pages;
+    }
+
+    const pages = paginateByChars(paragraphs, CHARS_PER_PAGE);
+    const totalPages = pages.length;
+    let currentPage = 1;
+
+    // ----- 渲染指定页，并强制滚动到页面顶部 -----
+    function renderPage(page) {
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+        currentPage = page;
+
+        const pageParas = pages[page - 1] || [];
+        // 段落之间用两个换行（即一个空行）隔开，保持原有间距视觉效果
+        let html = pageParas.map(para => para.replace(/\n/g, '<br>')).join('\n\n');
+        contentDiv.innerHTML = html;
+
+        // 更新导航状态
+        pageInput.value = currentPage;
+        totalSpan.textContent = totalPages;
+        prevBtn.disabled = (currentPage === 1);
+        nextBtn.disabled = (currentPage === totalPages);
+
+        // ★ 强制滚动到页面顶部（多重保障）
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        requestAnimationFrame(() => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        });
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }, 10);
+    }
+
+    // ----- 事件绑定 -----
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) renderPage(currentPage - 1);
+    });
+    nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) renderPage(currentPage + 1);
+    });
+
+    function jumpToPage() {
+        let target = parseInt(pageInput.value, 10);
+        if (isNaN(target) || target < 1) target = 1;
+        if (target > totalPages) target = totalPages;
+        renderPage(target);
+    }
+    goBtn.addEventListener('click', jumpToPage);
+    pageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') jumpToPage();
+    });
+
+    // ----- 初始化 -----
+    if (paragraphs.length === 0) {
+        contentDiv.innerHTML = '<p style="color:#888; text-align:center; padding:2em;">请将小说原文粘贴到隐藏区域。</p>';
+        totalSpan.textContent = '0';
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+    } else {
+        renderPage(1);
+    }
+})();
+</script>
+
+</body>
+</html>
