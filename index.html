@@ -4,89 +4,523 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>病仙</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8V4XWX4J1Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8V4XWX4J1Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-8V4XWX4J1Q');
+    </script>
+    <style>
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-card: #12121c;
+            --bg-card-hover: #181828;
+            --gold: #c9a86c;
+            --gold-light: #e8d5a8;
+            --gold-dim: #8a7048;
+            --ink: #e8e0d0;
+            --ink-muted: #a09888;
+            --ink-faint: #6a6258;
+            --purple: #3d2b5a;
+            --purple-glow: #5a3d8a;
+            --border-gold: rgba(201, 168, 108, 0.25);
+            --border-gold-bright: rgba(201, 168, 108, 0.5);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --shadow-gold: 0 0 20px rgba(201, 168, 108, 0.15);
+            --font-serif: 'Georgia', 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+            --font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  gtag('config', 'G-8V4XWX4J1Q');
-</script>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(61, 43, 90, 0.35) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(30, 20, 50, 0.45) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(15, 15, 25, 0.9) 0%, transparent 100%);
+            color: var(--ink);
+            font-family: var(--font-sans);
+            line-height: 1.75;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(1.5px 1.5px at 15% 25%, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(1px 1px at 35% 65%, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1.5px 1.5px at 55% 15%, rgba(255, 255, 255, 0.35), transparent),
+                radial-gradient(1px 1px at 75% 45%, rgba(255, 255, 255, 0.25), transparent),
+                radial-gradient(1.5px 1.5px at 90% 75%, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 5% 80%, rgba(255, 255, 255, 0.25), transparent),
+                radial-gradient(1.5px 1.5px at 65% 90%, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 45% 40%, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1.5px 1.5px at 25% 55%, rgba(255, 255, 255, 0.28), transparent),
+                radial-gradient(1px 1px at 85% 20%, rgba(255, 255, 255, 0.32), transparent),
+                radial-gradient(1.5px 1.5px at 70% 60%, rgba(255, 255, 255, 0.22), transparent),
+                radial-gradient(1px 1px at 10% 35%, rgba(255, 255, 255, 0.3), transparent);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 0;
+            animation: starTwinkle 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes starTwinkle {
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .page-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0 50px;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            border: 1px solid var(--border-gold);
+            padding: 6px 20px;
+            border-radius: 30px;
+            margin-bottom: 28px;
+            background: rgba(201, 168, 108, 0.05);
+            animation: fadeInDown 0.8s ease-out both;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: var(--gold-light);
+            letter-spacing: 0.12em;
+            text-shadow: 0 0 30px rgba(201, 168, 108, 0.3),
+                0 0 60px rgba(201, 168, 108, 0.15),
+                0 0 100px rgba(201, 168, 108, 0.08);
+            animation: fadeInDown 0.8s ease-out 0.1s both;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            color: var(--ink-muted);
+            letter-spacing: 0.5em;
+            margin-top: 16px;
+            font-style: italic;
+            animation: fadeInDown 0.8s ease-out 0.2s both;
+        }
+
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+            margin: 32px auto 0;
+            border: none;
+            opacity: 0.7;
+            position: relative;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .gold-line::after {
+            content: '◆';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gold);
+            font-size: 10px;
+            background: var(--bg-deep);
+            padding: 0 12px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .card {
+            background: linear-gradient(160deg, var(--bg-card) 0%, #0e0e18 100%);
+            border: 1px solid rgba(201, 168, 108, 0.12);
+            border-radius: 16px;
+            padding: 32px 36px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition);
+            animation: fadeInUp 0.7s ease-out both;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+            opacity: 0.5;
+            transition: opacity var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--border-gold-bright);
+            box-shadow: var(--shadow-card), var(--shadow-gold);
+            transform: translateY(-2px);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            letter-spacing: 0.06em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold-dim));
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .card p {
+            color: var(--ink);
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .card a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all var(--transition);
+            font-weight: 500;
+        }
+
+        .card a:hover {
+            color: var(--gold-light);
+            border-bottom-color: var(--gold-light);
+        }
+
+        .preserve-whitespace {
+            white-space: pre-line;
+        }
+
+        blockquote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--gold-light);
+            font-size: 1.05rem;
+            padding: 12px 20px;
+            border-left: 3px solid var(--gold);
+            background: rgba(201, 168, 108, 0.05);
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+            line-height: 1.9;
+        }
+
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .link-card {
+            display: block;
+            background: linear-gradient(150deg, rgba(201, 168, 108, 0.08) 0%, rgba(18, 18, 28, 0.9) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 20px 22px;
+            color: var(--ink);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-size: 0.98rem;
+            font-weight: 500;
+        }
+
+        .link-card:hover {
+            border-color: var(--gold);
+            background: linear-gradient(150deg, rgba(201, 168, 108, 0.15) 0%, rgba(20, 20, 32, 0.95) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(201, 168, 108, 0.12);
+            color: var(--gold-light);
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 44px 0 36px;
+            opacity: 0.6;
+        }
+
+        .section-divider .line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim));
+        }
+
+        .section-divider .line:last-child {
+            background: linear-gradient(90deg, var(--gold-dim), transparent);
+        }
+
+        .section-divider .diamond {
+            color: var(--gold);
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: var(--ink-faint);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            border-top: 1px solid rgba(201, 168, 108, 0.1);
+            margin-top: 40px;
+        }
+
+        .site-footer a {
+            color: var(--gold-dim);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .site-footer a:hover {
+            color: var(--gold-light);
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 0 16px 60px;
+            }
+
+            .hero {
+                padding: 60px 0 40px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.2rem, 10vw, 3.5rem);
+                letter-spacing: 0.08em;
+            }
+
+            .hero-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 0.3em;
+            }
+
+            .card {
+                padding: 24px 20px;
+                border-radius: 12px;
+            }
+
+            .link-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .link-card {
+                padding: 16px 18px;
+            }
+
+            .section-divider .line {
+                width: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<h1>病仙</h1>
+    <div class="page-container">
 
-<p>这是一篇小说，这只是草稿，还在创作阶段，无定时更新。如对小说有兴趣，可发送邮件至<a href="mailto:3843863686@qq.com">3843863686@qq.com</a>联系，或者私信这个qq号也可以哦。   
+        <header class="hero">
+            <span class="hero-badge">病仙</span>
+            <h1 class="hero-title">病仙</h1>
+            <p class="hero-subtitle">移山填海，法度春秋者，为仙。</p>
+            <div class="gold-line"></div>
+        </header>
+
+        <section class="card">
+            <p class="preserve-whitespace">这是一篇小说，这只是草稿，还在创作阶段，无定时更新。如对小说有兴趣，可发送邮件至<a href="mailto:3843863686@qq.com">3843863686@qq.com</a>联系，或者私信这个qq号也可以哦。   
 也可加群qq群号109459425  
 非常欢迎点评，广告勿扰</p>
+        </section>
 
-<p><strong>【小说类型】</strong><br>
-奇幻小说，完全架空，非爽文，单女主，群像，类型文学。</p>
+        <section class="card">
+            <h2 class="card-title">【小说类型】</h2>
+            <p>奇幻小说，完全架空，非爽文，单女主，群像，类型文学。</p>
+        </section>
 
-<p><strong>【小说简介】</strong><br>
-移山填海，法度春秋者，为仙。<br>
-人无其能，却有仙性，曰之为“病仙”。<br>
-这是一个关于人的故事，于是此书名为《病仙》……<br>
-<br>
-倘若发问无坚不摧，却又只能明知故问，是什么可得知晓……<br>
-倘若能使时间回返，却又错乱于旧时今日，是什么值得扭转……<br>
-<br>
-是本为仙者，却落人间病榻。<br>
-还是苦病已久者，如今得道成仙……<br>
-</p>
+        <section class="card">
+            <h2 class="card-title">【小说简介】</h2>
+            <blockquote>移山填海，法度春秋者，为仙。<br>
+                人无其能，却有仙性，曰之为“病仙”。<br>
+                这是一个关于人的故事，于是此书名为《病仙》……<br>
+                <br>
+                倘若发问无坚不摧，却又只能明知故问，是什么可得知晓……<br>
+                倘若能使时间回返，却又错乱于旧时今日，是什么值得扭转……<br>
+                <br>
+                是本为仙者，却落人间病榻。<br>
+                还是苦病已久者，如今得道成仙……</blockquote>
+        </section>
 
-<p><strong>【风格】</strong><br>
-采用完全限知视角，喜欢写人际关系中说不清道不明的感觉（至少到现在还是很有感觉的），需要动脑，对话设计自我感觉良好。</p>
+        <section class="card">
+            <h2 class="card-title">【风格】</h2>
+            <p>采用完全限知视角，喜欢写人际关系中说不清道不明的感觉（至少到现在还是很有感觉的），需要动脑，对话设计自我感觉良好。</p>
+        </section>
 
-<p><strong>【碎语（无剧透）】</strong><br>
-先声明一下，如果想要评价的话，不要按网文的那套来评价，本来就刻意没有写爽点，也不想塑造那种大众化的扁平形象，与其说是小说，不如说是我想象的产物，套网文的壳子有两个原因，一部分是确实读了不少，另一部分是这个框架下可以肆意地想象。  
-当然我觉得也没有那么严肃文学，水平差距还是有的，的确里面有很多东西写得不好，有不少废笔，当然，是有自己想表达的东西在里面的。  
-    
-本来我想的是让这个小说老死在我的硬盘里，可我舍不得我的人物，我的人物被我创造出来，赋予了生命，我就应该让他们存在，让他们好好活下去。<br>
-不过作者有点忙，时间不太多，所以没有选择投在网文平台上，我也不想拿我的人物们来盈利，他们应该活着，应该被看见。所以我选择了放在这里。<br>
-虽然我确实有点忙，不过正如我所说，我创作出来了这些人物，我就会负责到底，可能会一段时间不更新，但一定不会停更。<br>
-作者是真的爱作品里的每一个人物，所以除了正文是陈粟海的主场外，每个人物还会有单独的传记，当然不读传记不会影响正文的阅读的（其实传记都还没开始写hhh）</p>
+        <section class="card">
+            <h2 class="card-title">【碎语（无剧透）】</h2>
+            <p>先声明一下，如果想要评价的话，不要按网文的那套来评价，本来就刻意没有写爽点，也不想塑造那种大众化的扁平形象，与其说是小说，不如说是我想象的产物，套网文的壳子有两个原因，一部分是确实读了不少，另一部分是这个框架下可以肆意地想象。</p>
+            <p>当然我觉得也没有那么严肃文学，水平差距还是有的，的确里面有很多东西写得不好，有不少废笔，当然，是有自己想表达的东西在里面的。</p>
+            <p>本来我想的是让这个小说老死在我的硬盘里，可我舍不得我的人物，我的人物被我创造出来，赋予了生命，我就应该让他们存在，让他们好好活下去。</p>
+            <p>不过作者有点忙，时间不太多，所以没有选择投在网文平台上，我也不想拿我的人物们来盈利，他们应该活着，应该被看见。所以我选择了放在这里。</p>
+            <p>虽然我确实有点忙，不过正如我所说，我创作出来了这些人物，我就会负责到底，可能会一段时间不更新，但一定不会停更。</p>
+            <p>作者是真的爱作品里的每一个人物，所以除了正文是陈粟海的主场外，每个人物还会有单独的传记，当然不读传记不会影响正文的阅读的（其实传记都还没开始写hhh）</p>
+            <p>作者创作这本书的时候是有大纲的，所以文中可能有一些暂时没收回来的巧合，绝不是什么剧情杀。</p>
+            <p>认识我的人可能一眼就能看出来我是谁，可以私下联系我，不过不要说出来哦。</p>
+            <p>这是作者的第一本书，如果感兴趣的话可以看看，谢谢各位读者。</p>
+            <p>如果可以的话，可以帮忙转发一下吗，就当让某个人物在现实里多活一个小瞬间就好啦。</p>
+            <p>作者男，理科生，初次创作，的确在某些方面处理得不太好，多多包涵，已经在逐渐改进了，在学习中哦！</p>
+            <p>当然这还属于草稿性质，有时间了会大修，前一两万字处理得不太好，后面会改，不过不改剧情，只改文字和节奏。</p>
+            <p>对作品感兴趣或者对作者感兴趣的，可以发邮件找我哦（邮件见上）</p>
+            <p style="color: var(--gold-light); font-weight: 500;">别看啦！<br>
+                真有兴趣的话就点进小说里吧，谢谢各位读者。</p>
+        </section>
 
-<p>作者创作这本书的时候是有大纲的，所以文中可能有一些暂时没收回来的巧合，绝不是什么剧情杀。<br>
-认识我的人可能一眼就能看出来我是谁，可以私下联系我，不过不要说出来哦。</p>
+        <div class="section-divider">
+            <span class="line"></span>
+            <span class="diamond">◆ ◆ ◆</span>
+            <span class="line"></span>
+        </div>
 
-<p>这是作者的第一本书，如果感兴趣的话可以看看，谢谢各位读者。<br>
-如果可以的话，可以帮忙转发一下吗，就当让某个人物在现实里多活一个小瞬间就好啦。<br>
-作者男，理科生，初次创作，的确在某些方面处理得不太好，多多包涵，已经在逐渐改进了，在学习中哦！<br>
-当然这还属于草稿性质，有时间了会大修，前一两万字处理得不太好，后面会改，不过不改剧情，只改文字和节奏。<br>
-对作品感兴趣或者对作者感兴趣的，可以发邮件找我哦（邮件见上）</p>
+        <section class="card">
+            <h2 class="card-title">正文</h2>
+            <div class="link-grid">
+                <a href="序章.html" class="link-card">序章</a>
+                <a href="第一卷.html" class="link-card">第一卷：曲折跌宕的命运啊，通往何处</a>
+                <a href="第二卷.html" class="link-card">第二卷：扑朔迷离的抉择啊，何路可往</a>
+            </div>
+            <p style="margin-top: 12px; font-size: 0.85rem; color: var(--ink-muted);">（不怕被剧透的可以点，第一卷还没写完）</p>
+        </section>
 
-<p>别看啦！<br>
-真有兴趣的话就点进小说里吧，谢谢各位读者。</p>
+        <section class="card">
+            <h2 class="card-title">独白集</h2>
+            <p style="margin-bottom: 16px; font-size: 0.85rem; color: var(--ink-muted);">独白集推荐看完正文后再食用，否则涉嫌剧透哦。</p>
+            <div class="link-grid">
+                <a href="自陈.html" class="link-card">自陈</a>
+                <a href="池溶黛 2.19.html" class="link-card">池溶黛 2.19</a>
+                <a href="于元白 12.17.html" class="link-card">于元白 12.17</a>
+                <a href="道七 12.24.html" class="link-card">道七 12.24</a>
+                <a href="林湘妤 7.21.html" class="link-card">林湘妤 7.21</a>
+                <a href="谢知风 11.27.html" class="link-card">谢知风 11.27</a>
+                <a href="江纺朔 10.7.html" class="link-card">江纺朔 10.7</a>
+            </div>
+        </section>
 
-<h2>正文</h2>
+        <section class="card">
+            <h2 class="card-title">与小说毫无关系的短篇小说（施工中）</h2>
+            <div class="link-grid">
+                <a href="奔月.html" class="link-card">奔月</a>
+            </div>
+        </section>
 
-<ul>
-<li><a href="序章.html">序章</a></li>
-<li><a href="第一卷.html">第一卷：曲折跌宕的命运啊，通往何处</a></li>
-<li><a href="第二卷.html">第二卷：扑朔迷离的抉择啊，何路可往</a></li>（不怕被剧透的可以点，第一卷还没写完）
-</ul>
+        <footer class="site-footer">
+            <p>
+                移山填海，法度春秋者，为仙。<br>
+                人无其能，却有仙性，曰之为“病仙”。
+            </p>
+        </footer>
 
-<h2>独白集</h2>
-
-<p>独白集推荐看完正文后再食用，否则涉嫌剧透哦。</p>
-<ul>
-<li><a href="自陈.html">自陈</a></li>
-<li><a href="池溶黛 2.19.html">池溶黛 2.19</a></li>
-<li><a href="于元白 12.17.html">于元白 12.17</a></li>
-<li><a href="道七 12.24.html">道七 12.24</a></li>
-<li><a href="林湘妤 7.21.html">林湘妤 7.21</a></li>
-<li><a href="谢知风 11.27.html">谢知风 11.27</a></li>
-<li><a href="江纺朔 10.7.html">江纺朔 10.7</a></li>
-</ul>
-
-<h2>与小说毫无关系的短篇小说（施工中）</h2>
-<ul>
-    <li><a href="奔月.html">奔月</a></li>
-    
-</ul>
+    </div>
 
 </body>
 </html>
