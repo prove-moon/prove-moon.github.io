@@ -1,9 +1,8 @@
 /* ==================================================
-   《病仙》章节页面统一主题
-   适用于：序章、第一卷、第二卷等所有章节
+   《病仙》章节页面 · 柔和阅读版
+   降低视觉噪音，保护眼睛，更适合长时间阅读
    ================================================== */
 
-/* ---------- 全局 ---------- */
 * {
     margin: 0;
     padding: 0;
@@ -11,14 +10,12 @@
 }
 
 body {
-    background-color: #0a0a0f;
-    background-image:
-        radial-gradient(ellipse at 20% 10%, rgba(61, 43, 90, 0.35) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 90%, rgba(30, 20, 50, 0.45) 0%, transparent 55%),
-        radial-gradient(ellipse at 50% 50%, rgba(15, 15, 25, 0.9) 0%, transparent 100%);
-    color: #e8e0d0;
+    background-color: #111118;
+    /* 去掉了复杂的径向渐变，改用纯色背景，减少视觉杂乱 */
+    background-image: none;
+    color: #d6cfc0;
     font-family: 'Georgia', 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
-    line-height: 1.75;
+    line-height: 1.8;
     min-height: 100vh;
     padding: 20px;
     display: flex;
@@ -28,65 +25,68 @@ body {
 
 /* ---------- 正文卡片 ---------- */
 #novel-content {
-    background: rgba(18, 18, 28, 0.95);
-    border: 1px solid rgba(201, 168, 108, 0.25);
-    border-radius: 12px;
-    padding: 30px 35px;
+    background: #1a1a22;
+    /* 柔和边框，降低亮度 */
+    border: 1px solid rgba(201, 168, 108, 0.2);
+    border-radius: 8px;
+    padding: 32px 38px;
     max-width: 800px;
     width: 100%;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    color: #e8e0d0;
-    margin-bottom: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    color: #e0d8cc;
+    margin-bottom: 24px;
     white-space: normal;
     font-size: 1.05rem;
+    /* 增加行距，让眼睛更放松 */
+    line-height: 1.9;
 }
 
 #novel-content p {
     margin-bottom: 1.2em;
 }
 
-/* ---------- 分页导航栏 ---------- */
+/* ---------- 分页导航栏（低调化） ---------- */
 .pagination-bar {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 15px;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(201, 168, 108, 0.25);
-    border-radius: 30px;
-    padding: 15px 20px;
+    gap: 12px;
+    background: #181820;
+    border: 1px solid rgba(201, 168, 108, 0.15);
+    border-radius: 24px;
+    padding: 12px 16px;
     max-width: 800px;
     width: 100%;
-    color: #a09888;
+    color: #b0a898;
 }
 
 .pagination-btn {
-    background: rgba(201, 168, 108, 0.08);
-    border: 1px solid rgba(201, 168, 108, 0.4);
-    border-radius: 30px;
-    padding: 8px 20px;
+    background: #22222c;
+    border: 1px solid rgba(201, 168, 108, 0.25);
+    border-radius: 20px;
+    padding: 7px 18px;
     font-size: 0.95rem;
-    color: #e8d5a8;
+    color: #d6c8b0;
     cursor: pointer;
     transition: 0.2s;
-    min-width: 90px;
+    min-width: 85px;
     font-family: inherit;
 }
 
 .pagination-btn:hover {
-    background: rgba(201, 168, 108, 0.18);
-    border-color: #c9a86c;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: #2c2c38;
+    border-color: #b79a68;
+    color: #f0e8dc;
+    transform: none;
+    box-shadow: none;
 }
 
 .pagination-btn:disabled {
-    opacity: 0.4;
+    opacity: 0.5;
     cursor: not-allowed;
-    background: rgba(201, 168, 108, 0.05);
-    color: #6a6258;
+    background: #1e1e26;
+    color: #7a7264;
     transform: none;
     box-shadow: none;
 }
@@ -94,43 +94,43 @@ body {
 .page-jump {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-size: 0.95rem;
 }
 
 .page-input {
-    width: 65px;
-    padding: 6px 8px;
-    border: 1px solid rgba(201, 168, 108, 0.4);
-    border-radius: 20px;
+    width: 60px;
+    padding: 5px 8px;
+    border: 1px solid rgba(201, 168, 108, 0.3);
+    border-radius: 16px;
     text-align: center;
     font-size: 0.95rem;
-    background: rgba(0, 0, 0, 0.5);
-    color: #e8e0d0;
+    background: #1e1e26;
+    color: #e0d8cc;
     font-family: inherit;
 }
 
 .page-input:focus {
     outline: none;
-    border-color: #c9a86c;
-    box-shadow: 0 0 8px rgba(201, 168, 108, 0.3);
+    border-color: #b79a68;
+    box-shadow: 0 0 5px rgba(201, 168, 108, 0.2);
 }
 
 .go-btn {
-    background: #b76e2e;
-    border: 1px solid #9c5a26;
-    border-radius: 20px;
-    padding: 6px 18px;
+    background: #8f5e3a;
+    border: 1px solid #7a4e2e;
+    border-radius: 16px;
+    padding: 5px 16px;
     font-size: 0.9rem;
-    color: #fff;
+    color: #f0e8dc;
     cursor: pointer;
     transition: 0.2s;
     font-family: inherit;
 }
 
 .go-btn:hover {
-    background: #9c5a26;
-    transform: translateY(-1px);
+    background: #a06b42;
+    transform: none;
 }
 
 /* ---------- 隐藏原文 ---------- */
@@ -146,14 +146,15 @@ body {
     #novel-content {
         padding: 20px 18px;
         font-size: 0.95rem;
+        line-height: 1.8;
     }
     .pagination-bar {
-        padding: 12px 10px;
-        gap: 10px;
+        padding: 10px 8px;
+        gap: 8px;
     }
     .pagination-btn {
-        padding: 6px 14px;
-        min-width: 70px;
+        padding: 6px 12px;
+        min-width: 65px;
         font-size: 0.85rem;
     }
 }
