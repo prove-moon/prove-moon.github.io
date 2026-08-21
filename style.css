@@ -1,38 +1,23 @@
 /* ==================================================
-   《病仙》章节页面 · 深色主题（保留原始布局与空格）
-   基于原始 style 修改，仅更换配色
+   《病仙》章节页面深色主题
+   基于原始章节样式，仅替换颜色，布局与字体完全不变
+   使用方法：保存为 style.css，在章节 HTML 中通过
+   <link rel="stylesheet" href="style.css"> 引入
+   并删除原有的 <style> ... </style> 块
    ================================================== */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    white-space: pre-wrap;                  /* 保留原缩进和换行 */
-    font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;  /* 原始字体 */
+    white-space: pre-wrap;
+    font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
     font-size: 1.1em;
     line-height: 1.6;
     max-width: 800px;
-    margin: 0 auto 2em auto;                /* 原始居中布局 */
+    margin: 0 auto 2em auto;
     padding: 0 1em;
-    background: #111118;                    /* 深色背景替换 */
-    color: #d6cfc0;                         /* 浅色文字 */
+    background: #111118;       /* 原 #fefefe */
+    color: #d6cfc0;            /* 原 #111 */
 }
 
-/* 正文容器（原始 JS 会填充到这里） */
-#novel-content {
-    color: #e0d8cc;
-    /* 不加额外 padding，保持原始布局 */
-    /* 如需卡片背景可取消注释下面三行，但会改变原始结构 */
-    /* background: #1a1a22;
-    border: 1px solid rgba(201,168,108,0.2);
-    border-radius: 8px;
-    padding: 24px; */
-}
-
-/* 分页导航栏 */
 .pagination-bar {
     display: flex;
     align-items: center;
@@ -40,26 +25,26 @@ body {
     gap: 12px;
     margin: 2.5em 0 1.5em;
     padding-top: 1.2em;
-    border-top: 1px solid #3a352c;          /* 深色边框 */
+    border-top: 1px solid #3a352c;   /* 原 #e0d6cc */
     font-family: inherit;
 }
 
 .pagination-btn {
-    background: #22222c;
-    border: 1px solid #4a4238;
+    background: #22222c;              /* 原 #f5ede5 */
+    border: 1px solid #4a4238;        /* 原 #d6c9be */
     border-radius: 30px;
     padding: 6px 18px;
     font-size: 1rem;
-    color: #d6c8b0;
+    color: #d6c8b0;                  /* 原 #3e2e23 */
     cursor: pointer;
     transition: 0.15s;
     min-width: 85px;
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .pagination-btn:hover {
-    background: #2c2c38;
-    border-color: #b79a68;
+    background: #2c2c38;              /* 原 #e7dbd0 */
+    border-color: #b79a68;            /* 原 #b7a392 */
 }
 
 .pagination-btn:disabled {
@@ -78,28 +63,29 @@ body {
 .page-input {
     width: 70px;
     padding: 5px 8px;
-    border: 1px solid #4a4238;
+    border: 1px solid #4a4238;        /* 原 #ccc5bc */
     border-radius: 24px;
     text-align: center;
     font-size: 1rem;
-    background: #1e1e26;
+    background: #1e1e26;              /* 原 white */
     color: #e0d8cc;
     font-family: inherit;
 }
 
 .go-btn {
-    background: #8f5e3a;
+    background: #8f5e3a;              /* 原 #b76e2e */
     color: white;
-    border: 1px solid #7a4e2e;
+    border: none;
     border-radius: 24px;
     padding: 5px 16px;
     font-size: 0.95rem;
     cursor: pointer;
+    border: 1px solid #7a4e2e;        /* 原 #9c5a26 */
     transition: 0.15s;
 }
 
 .go-btn:hover {
-    background: #a06b42;
+    background: #a06b42;              /* 原 #9c5a26 */
 }
 
 #raw-text-source {
