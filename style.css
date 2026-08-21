@@ -1,7 +1,6 @@
 /* ==================================================
-   《病仙》章节页面 · 柔和阅读版（保留空格缩进）
-   适用于：序章、第一卷、第二卷等所有章节
-   特点：深色护眼、保留原文空两格、分页功能不变
+   《病仙》章节页面 · 深色主题（保留原始布局与空格）
+   基于原始 style 修改，仅更换配色
    ================================================== */
 
 * {
@@ -11,148 +10,98 @@
 }
 
 body {
-    background-color: #111118;
-    background-image: none;
-    color: #d6cfc0;
-    font-family: 'Georgia', 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
-    line-height: 1.8;
-    min-height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* ---------- 正文卡片 ---------- */
-#novel-content {
-    background: #1a1a22;
-    border: 1px solid rgba(201, 168, 108, 0.2);
-    border-radius: 8px;
-    padding: 32px 38px;
+    white-space: pre-wrap;                  /* 保留原缩进和换行 */
+    font-family: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;  /* 原始字体 */
+    font-size: 1.1em;
+    line-height: 1.6;
     max-width: 800px;
-    width: 100%;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    margin: 0 auto 2em auto;                /* 原始居中布局 */
+    padding: 0 1em;
+    background: #111118;                    /* 深色背景替换 */
+    color: #d6cfc0;                         /* 浅色文字 */
+}
+
+/* 正文容器（原始 JS 会填充到这里） */
+#novel-content {
     color: #e0d8cc;
-    margin-bottom: 24px;
-    white-space: pre-wrap;          /* 保留原文空格和换行，允许自动换行 */
-    font-size: 1.05rem;
-    line-height: 1.9;
+    /* 不加额外 padding，保持原始布局 */
+    /* 如需卡片背景可取消注释下面三行，但会改变原始结构 */
+    /* background: #1a1a22;
+    border: 1px solid rgba(201,168,108,0.2);
+    border-radius: 8px;
+    padding: 24px; */
 }
 
-#novel-content p {
-    margin-bottom: 1.2em;
-}
-
-/* ---------- 分页导航栏（低调化） ---------- */
+/* 分页导航栏 */
 .pagination-bar {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 12px;
-    background: #181820;
-    border: 1px solid rgba(201, 168, 108, 0.15);
-    border-radius: 24px;
-    padding: 12px 16px;
-    max-width: 800px;
-    width: 100%;
-    color: #b0a898;
+    margin: 2.5em 0 1.5em;
+    padding-top: 1.2em;
+    border-top: 1px solid #3a352c;          /* 深色边框 */
+    font-family: inherit;
 }
 
 .pagination-btn {
     background: #22222c;
-    border: 1px solid rgba(201, 168, 108, 0.25);
-    border-radius: 20px;
-    padding: 7px 18px;
-    font-size: 0.95rem;
+    border: 1px solid #4a4238;
+    border-radius: 30px;
+    padding: 6px 18px;
+    font-size: 1rem;
     color: #d6c8b0;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.15s;
     min-width: 85px;
-    font-family: inherit;
+    box-shadow: none;
 }
 
 .pagination-btn:hover {
     background: #2c2c38;
     border-color: #b79a68;
-    color: #f0e8dc;
-    transform: none;
-    box-shadow: none;
 }
 
 .pagination-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
-    background: #1e1e26;
-    color: #7a7264;
-    transform: none;
+    background: #22222c;
     box-shadow: none;
 }
 
 .page-jump {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.95rem;
+    gap: 8px;
 }
 
 .page-input {
-    width: 60px;
+    width: 70px;
     padding: 5px 8px;
-    border: 1px solid rgba(201, 168, 108, 0.3);
-    border-radius: 16px;
+    border: 1px solid #4a4238;
+    border-radius: 24px;
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 1rem;
     background: #1e1e26;
     color: #e0d8cc;
     font-family: inherit;
 }
 
-.page-input:focus {
-    outline: none;
-    border-color: #b79a68;
-    box-shadow: 0 0 5px rgba(201, 168, 108, 0.2);
-}
-
 .go-btn {
     background: #8f5e3a;
+    color: white;
     border: 1px solid #7a4e2e;
-    border-radius: 16px;
+    border-radius: 24px;
     padding: 5px 16px;
-    font-size: 0.9rem;
-    color: #f0e8dc;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: 0.2s;
-    font-family: inherit;
+    transition: 0.15s;
 }
 
 .go-btn:hover {
     background: #a06b42;
-    transform: none;
 }
 
-/* ---------- 隐藏原文 ---------- */
 #raw-text-source {
     display: none;
-}
-
-/* ---------- 响应式 ---------- */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    #novel-content {
-        padding: 20px 18px;
-        font-size: 0.95rem;
-        line-height: 1.8;
-    }
-    .pagination-bar {
-        padding: 10px 8px;
-        gap: 8px;
-    }
-    .pagination-btn {
-        padding: 6px 12px;
-        min-width: 65px;
-        font-size: 0.85rem;
-    }
 }
