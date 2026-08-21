@@ -1,0 +1,253 @@
+/* ==========================================================================
+   《病仙》统一深色奇幻主题
+   适用于所有章节页面（序章、第一卷、第二卷等）
+   需要与 HTML 文件放在同一目录下（或相对路径正确）
+   ========================================================================== */
+
+:root {
+    --bg-deep: #0a0a0f;
+    --bg-card: #12121c;
+    --bg-card-hover: #181828;
+    --gold: #c9a86c;
+    --gold-light: #e8d5a8;
+    --gold-dim: #8a7048;
+    --ink: #e8e0d0;
+    --ink-muted: #a09888;
+    --ink-faint: #6a6258;
+    --border-gold: rgba(201, 168, 108, 0.25);
+    --border-gold-bright: rgba(201, 168, 108, 0.5);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-gold: 0 0 20px rgba(201, 168, 108, 0.15);
+    --font-serif: 'Georgia', 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+    --font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--bg-deep);
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(61, 43, 90, 0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(30, 20, 50, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, rgba(15, 15, 25, 0.9) 0%, transparent 100%);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.75;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    white-space: normal;               /* 取消 pre-wrap，避免影响排版 */
+    max-width: 100%;                   /* 取消原 800px 限制 */
+    margin: 0;
+    padding: 0;
+}
+
+/* 星光粒子背景 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(1.5px 1.5px at 15% 25%, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1px 1px at 35% 65%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 55% 15%, rgba(255, 255, 255, 0.35), transparent),
+        radial-gradient(1px 1px at 75% 45%, rgba(255, 255, 255, 0.25), transparent),
+        radial-gradient(1.5px 1.5px at 90% 75%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 5% 80%, rgba(255, 255, 255, 0.25), transparent),
+        radial-gradient(1.5px 1.5px at 65% 90%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 45% 40%, rgba(255, 255, 255, 0.2), transparent),
+        radial-gradient(1.5px 1.5px at 25% 55%, rgba(255, 255, 255, 0.28), transparent),
+        radial-gradient(1px 1px at 85% 20%, rgba(255, 255, 255, 0.32), transparent),
+        radial-gradient(1.5px 1.5px at 70% 60%, rgba(255, 255, 255, 0.22), transparent),
+        radial-gradient(1px 1px at 10% 35%, rgba(255, 255, 255, 0.3), transparent);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+    animation: starTwinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* 正文容器 */
+.page-container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 卡片式正文区域 */
+#novel-content {
+    background: linear-gradient(160deg, var(--bg-card) 0%, #0e0e18 100%);
+    border: 1px solid rgba(201, 168, 108, 0.12);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-card);
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.9;
+    transition: all var(--transition);
+    font-family: var(--font-serif);
+    letter-spacing: 0.02em;
+}
+
+#novel-content:hover {
+    border-color: var(--border-gold-bright);
+    box-shadow: var(--shadow-card), var(--shadow-gold);
+}
+
+/* 段落间距 */
+#novel-content p {
+    margin-bottom: 1.2em;
+}
+
+/* 分页导航栏 */
+.pagination-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 2.5em 0 1.5em;
+    padding: 1.5em 0 1.2em;
+    border-top: 1px solid rgba(201, 168, 108, 0.2);
+    border-bottom: 1px solid rgba(201, 168, 108, 0.2);
+    font-family: var(--font-sans);
+    color: var(--ink-muted);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.pagination-btn {
+    background: rgba(201, 168, 108, 0.08);
+    border: 1px solid var(--border-gold);
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-size: 0.95rem;
+    color: var(--gold-light);
+    cursor: pointer;
+    transition: all var(--transition);
+    min-width: 100px;
+    letter-spacing: 0.05em;
+    box-shadow: none;
+    font-family: var(--font-sans);
+    font-weight: 500;
+}
+
+.pagination-btn:hover {
+    background: rgba(201, 168, 108, 0.18);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    background: rgba(201, 168, 108, 0.05);
+}
+
+.page-jump {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+}
+
+.page-input {
+    width: 70px;
+    padding: 6px 10px;
+    border: 1px solid var(--border-gold);
+    border-radius: 24px;
+    text-align: center;
+    font-size: 0.95rem;
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    transition: all var(--transition);
+}
+
+.page-input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 8px rgba(201, 168, 108, 0.3);
+}
+
+.go-btn {
+    background: linear-gradient(135deg, #b76e2e, #8f5525);
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 6px 18px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: 1px solid #9c5a26;
+    transition: all var(--transition);
+    font-family: var(--font-sans);
+    letter-spacing: 0.03em;
+}
+
+.go-btn:hover {
+    background: linear-gradient(135deg, #c8813a, #a5652b);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 隐藏原文文本源 */
+#raw-text-source {
+    display: none;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 20px 16px 60px;
+    }
+
+    #novel-content {
+        padding: 24px 20px;
+        font-size: 0.95rem;
+        line-height: 1.8;
+        border-radius: 12px;
+    }
+
+    .pagination-bar {
+        gap: 10px;
+        padding: 12px 10px;
+    }
+
+    .pagination-btn {
+        padding: 6px 14px;
+        min-width: 70px;
+        font-size: 0.85rem;
+    }
+
+    .page-input {
+        width: 55px;
+    }
+}
