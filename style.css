@@ -1,6 +1,7 @@
 /* ==================================================
-   《病仙》章节页面 · 柔和阅读版
-   降低视觉噪音，保护眼睛，更适合长时间阅读
+   《病仙》章节页面 · 柔和阅读版（保留空格缩进）
+   适用于：序章、第一卷、第二卷等所有章节
+   特点：深色护眼、保留原文空两格、分页功能不变
    ================================================== */
 
 * {
@@ -11,7 +12,6 @@
 
 body {
     background-color: #111118;
-    /* 去掉了复杂的径向渐变，改用纯色背景，减少视觉杂乱 */
     background-image: none;
     color: #d6cfc0;
     font-family: 'Georgia', 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
@@ -26,7 +26,6 @@ body {
 /* ---------- 正文卡片 ---------- */
 #novel-content {
     background: #1a1a22;
-    /* 柔和边框，降低亮度 */
     border: 1px solid rgba(201, 168, 108, 0.2);
     border-radius: 8px;
     padding: 32px 38px;
@@ -35,9 +34,8 @@ body {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     color: #e0d8cc;
     margin-bottom: 24px;
-    white-space: normal;
+    white-space: pre-wrap;          /* 保留原文空格和换行，允许自动换行 */
     font-size: 1.05rem;
-    /* 增加行距，让眼睛更放松 */
     line-height: 1.9;
 }
 
